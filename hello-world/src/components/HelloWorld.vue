@@ -116,7 +116,8 @@ export default {
     // var my_month = 12;
     // this.currentMonth = 12
     // this.Month =12
-    var my_day = 29;
+    // var my_day = 29;
+    var my_day = currentDate.getDate()
     gatmiddle = this.middleNum;
     this.initCalender(my_year, my_month, my_day);
     // 拿到被选中的日期
