@@ -93,7 +93,7 @@ export default {
       FullYear: "", // 年份
       Month: "", // 月份
       day: "", // 当天日期
-      type: "1", // 1是单选 2是多选
+      type: "2", // 1是单选 2是多选
       currenttimestamp: "", // 当前时间的时间戳
       startDay: "", // 开始时间
       endDay: "", // 结束时间

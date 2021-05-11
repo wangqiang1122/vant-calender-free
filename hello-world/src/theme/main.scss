@@ -1,0 +1,20 @@
+@import "view";
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: PingFang SC;
+}
+body,html,.page{
+   width: 100%;
+   height: 100%;
+   background: #f2f2f2;
+}
+.spellgroup .details .content p img{
+       width: 100%;
+ }
+ .spellgroupmyGroup .van-list{
+    width: 100%;
+    min-height: 100vh;
+    -webkit-overflow-scrolling: touch; 
+}

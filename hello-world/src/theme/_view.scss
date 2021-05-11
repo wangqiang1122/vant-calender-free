@@ -1,0 +1,135 @@
+$ios-transition-duration: 500ms !default;
+$ios-transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1) !default;
+
+$android-transition-duration: 200ms !default;
+$android-transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1) !default;
+
+
+
+@mixin view-right() {
+  transform: translate3d(100%, 0, 0);
+}
+
+@mixin view-left() {
+  transform: translate3d(-100%, 0, 0);
+}
+
+@mixin view-center() {
+  transform: translate3d(0, 0, 0);
+}
+
+@mixin view-bottom() {
+  transform: translate3d(0, 100%, 0);
+}
+
+.page-enter-active,
+.page-leave-active,
+.platform-ios .page-enter-active,
+.platform-ios .page-leave-active {
+  transition-duration: $ios-transition-duration;
+  transition-timing-function: $ios-transition-timing-function;
+  transition-property: opacity, transform;
+}
+
+.platform-android .page-enter-active,
+.platform-android .page-leave-active {
+  transition-duration: $android-transition-duration;
+  transition-timing-function: $android-transition-timing-function;
+}
+
+[transition-direction="forward"] {
+  .page-enter {
+    @include view-right();
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .page-enter-active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .page-enter-to {
+    @include view-center();
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .page-leave {
+    @include view-center();
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .page-leave-to {
+    @include view-left();
+    opacity: 0;
+    z-index: 1;
+  }
+}
+
+[transition-direction="back"] {
+  .page-enter {
+    @include view-left();
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .page-enter-to {
+    @include view-center();
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .page-leave {
+    @include view-center();
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .page-leave-active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .page-leave-to {
+    @include view-right();
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+// 页面的固定规范
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  top: constant(safe-area-inset-top);
+  /* 兼容 iOS < 11.2 */
+  top: env(safe-area-inset-top);
+  /* 兼容 iOS > 11.2 */
+  bottom: constant(safe-area-inset-bottom);
+  /* 兼容 iOS < 11.2 */
+  bottom: env(safe-area-inset-bottom);
+
+  /* 兼容 iOS > 11.2 */
+  .page-content {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // 预防图片点击访问下载
+  .event-none {
+    pointer-events: none;
+  }
+}
+
+.van-nav-bar .van-icon {
+  color: #000000 !important;
+}
