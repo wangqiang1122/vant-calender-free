@@ -80,11 +80,11 @@ export default {
     calendershow: {
       default: false,
     },
-    type: {
-      default: function () {
-        return 1;
-      }, // 1是单选 2是多选
-    },
+    // type: {
+    //   default: function () {
+    //     return 1;
+    //   }, // 1是单选 2是多选
+    // },
     productType: {
       default: "",
     },
@@ -101,6 +101,13 @@ export default {
     },
     calendershow: function (e) {
       this.show = e;
+    },
+    productType: {
+      handler: function(productType) {
+        this.type = productType==1?'2':'1'
+      },
+      deep: true,
+	    immediate: true,
     },
     skuCode: function(newval,oldval) {
       if (newval!=oldval) {
@@ -135,6 +142,7 @@ export default {
       specialEndTime: false, // 初始化end时间是否需要特殊处理
       middleNum: 0,
       isreset: false,
+      type: 1,
       finishText: "最多可预定3个月内的产品",
       Maxactive: 15, // 不允许超过的天数
     };
@@ -1019,6 +1027,14 @@ export default {
   font-size: 10px;
   color: #ff3323;
   text-align: center;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width: 100%;
 }
 .active {
   background-color: #ffbc00;
