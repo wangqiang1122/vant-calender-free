@@ -1,5 +1,5 @@
 <template>
-   <div class='twisterpopup'>
+   <div class='twisterpopup' v-show="popuopshow">
       <div class='v1' :class="{ kai: isk }" ref='v1'>   
         <div class='top1'>
             <img 
@@ -9,7 +9,9 @@
                         <img 
             src="https://crm-dev-itrigger.oss-cn-beijing.aliyuncs.com/sunac/luckGrid/twister/egg_2%402x.png" alt="">
         </div>
-        <div class="g1" v-show="isshow">
+        <div class="g1"  :class="{
+            g1active: isk
+        }">
             <div class='bling'>
             </div>
             <div class='ban'>
@@ -35,13 +37,24 @@ export default {
         return {
             isk: false,
             isshow: false,
+            gshow: false
         }
+    },
+    props: {
+      popuopshow: false,  
     },
     mounted: function() {
         setTimeout(()=>{
             this.isk = true
+            this.gshow = true
         },2000)
-    }
+        console.log(this.$refs.v1)
+        this.$refs.v1.addEventListener('transitionend',()=>{
+            this.isshow = true
+            // alert()
+        })
+    },
+
 };
 </script>
 
@@ -66,11 +79,12 @@ export default {
       .top1{
         position: absolute; 
         top: 0;
-        z-index: 2;
+        z-index: 3;
       }
       .bottom1{
        position: absolute; 
        bottom: 0;
+       z-index: 2;
       }
   }
   .kai {
@@ -87,12 +101,17 @@ export default {
   .g1{
       width: 350px;
       display: flex;
+      transform: scale3d(.3,.3,.3);
       align-items: center;
     //   height: 100px;
       background-size: 100% 100%;
-      z-index: 3;
+      transition: all 1s;
+      z-index: 1;
       background-repeat: no-repeat;
       background-image: url(https://crm-dev-itrigger.oss-cn-beijing.aliyuncs.com/sunac/luckGrid/twister/stars.png);
+  }
+  .g1active{
+      transform: scale3d(1,1,1);
   }
   .bling{
       display: flex;
@@ -117,7 +136,7 @@ export default {
   .ban{
       box-sizing: border-box;
       position: absolute;
-      left: 85px;
+      left: 64px;
       width: 215px;
       z-index: 13;
       height: 80px;
